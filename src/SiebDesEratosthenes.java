@@ -5,7 +5,7 @@ public class SiebDesEratosthenes
 
 	public void gebePrimzahlenAus(int grenze)
 	{
-		if (grenze < 1)
+		if (grenze < 2)
 			System.err.println("Ungültige Eingabe!");
 		else
 		{
@@ -23,26 +23,33 @@ public class SiebDesEratosthenes
 
 	private int[][] findePrimzahlen()
 	{
-		sieb = new int[n][2]; // Zahl, Status: 0 ist nichts, 1 ist gerahmt, 2 ist gestrichen
+		if(n % 2 == 0)
+			sieb = new int[n/2 + 1][2]; // Zahl, Status: 0 ist nichts, 1 ist gerahmt, 2 ist gestrichen
+		else
+			sieb = new int[n/2 + 2][2]; // bei ungeradem n wird eine Postion mehr benötigt
 
-		for (int pos = 0; pos < n; pos++)
+		int pos = 0;
+		for (int zahl = 1; zahl <= n; zahl++)
 		{
-			sieb[pos][0] = pos + 1; // Zahlen eintragen ((pos+1) ist Zahl)
+			if(zahl == 2 || zahl % 2 != 0){  // Nur ungerade Zahlen (Ausnahme 2)
+				sieb[pos][0] = zahl; // Zahlen eintragen ((pos+1) ist Zahl)
+				pos++;
+			}
 		}
 		sieb[0][1] = 2; // Eins durchstreichen
 
-		int pos = 0;
+		pos = 0;
+		int zahl = 1;
 		do
 		{
 			if (sieb[pos][1] == 0) // Wenn Zahl nicht durchgestrichen oder gerahmt
 			{
 				sieb[pos][1] = 1; // Zahl einrahmen
-
-				int posVielfache = (pos + 1) + (pos + 1) - 1; // Position des ersten Vielfachen der kleinsten nicht durchgestrichenen oder gerahmten Zahl
-				while (posVielfache < n)
-				{
-					sieb[posVielfache][1] = 2; // Zahl durchstreichen
-					posVielfache = (pos + 1) + (posVielfache + 1) - 1;
+				zahl = sieb[pos][0]; // Zahl speichern
+				
+				for(int i = pos + 1; i < sieb.length; i++){
+					if(sieb[i][0] % zahl == 0) // Wenn Zahl Vielfaches von eingerahmter Zahl
+						sieb[i][1] = 2; // Zahl durchstreichen
 				}
 			}
 			pos++;
