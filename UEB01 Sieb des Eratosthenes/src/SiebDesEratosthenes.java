@@ -18,28 +18,48 @@ public class SiebDesEratosthenes
 					System.out.print(sieb[i][0] + " ");
 			}
 		}
+	}
+	
+	public long berechneAnzPrimzahlen(int grenze)
+	{
+		long anz = 0;
+		
+		if (grenze < 2)
+			System.err.println("Ungültige Eingabe!");
+		else
+		{
+			n = grenze;
+			findePrimzahlen();
 
+			for (int i = 0; i < sieb.length; i++)
+			{
+				if (sieb[i][1] != 2)
+					anz++;
+			}
+		}
+		return anz;
 	}
 
 	private int[][] findePrimzahlen()
 	{
 		if(n % 2 == 0)
-			sieb = new int[n/2 + 1][2]; // Zahl, Status: 0 ist nichts, 1 ist gerahmt, 2 ist gestrichen
+			sieb = new int[n/2][2]; // Zahl, Status: 0 ist nichts, 1 ist gerahmt, 2 ist gestrichen
 		else
-			sieb = new int[n/2 + 2][2]; // bei ungeradem n wird eine Postion mehr benötigt
+			sieb = new int[n/2 + 1][2]; // bei ungeradem n wird eine Postion mehr benötigt
 
 		int pos = 0;
-		for (int zahl = 1; zahl <= n; zahl++)
+		int zahl = 2;
+		for (zahl = 2; zahl <= n; zahl++)
 		{
 			if(zahl == 2 || zahl % 2 != 0){  // Nur ungerade Zahlen (Ausnahme 2)
 				sieb[pos][0] = zahl; // Zahlen eintragen ((pos+1) ist Zahl)
 				pos++;
 			}
 		}
-		sieb[0][1] = 2; // Eins durchstreichen
 
-		pos = 0;
-		int zahl = 1;
+		pos = 1;
+		zahl = 3;
+		int posVielfaches = pos + zahl;
 		do
 		{
 			if (sieb[pos][1] == 0) // Wenn Zahl nicht durchgestrichen oder gerahmt
@@ -47,14 +67,14 @@ public class SiebDesEratosthenes
 				sieb[pos][1] = 1; // Zahl einrahmen
 				zahl = sieb[pos][0]; // Zahl speichern
 				
-				for(int i = pos + 1; i < sieb.length; i++){
-					if(sieb[i][0] % zahl == 0) // Wenn Zahl Vielfaches von eingerahmter Zahl
-						sieb[i][1] = 2; // Zahl durchstreichen
+				for(posVielfaches = pos + zahl; posVielfaches < sieb.length; posVielfaches += zahl){
+					if(sieb[posVielfaches][1] == 0 ) // Wenn Zahl Vielfaches von eingerahmter Zahl nicht durchgestrichen oder gerahmt
+						sieb[posVielfaches][1] = 2; // Zahl durchstreichen
 				}
 			}
 			pos++;
 		}
-		while ((pos + 1) * (pos + 1) <= n);
+		while (zahl * zahl <= n);
 
 		return sieb;
 	}
