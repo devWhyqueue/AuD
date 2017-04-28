@@ -192,9 +192,9 @@ public class Liste<T>
 	{
 		while (zweiteListe.weitereElemente())
 		{
-			this.anfuegenElement(zweiteListe.naechstesElement());
+			anfuegenElement(zweiteListe.naechstesElement());
 		}
-		this.anfuegenElement(zweiteListe.aktuellerZeiger().getDaten());
+		anfuegenElement(zweiteListe.aktuellerZeiger().getDaten());
 
 	}
 
@@ -202,8 +202,30 @@ public class Liste<T>
 	{
 		int anzGeloeschte = 0;
 
-		// Diese Methode wird im Praktikum implementiert
-		// TODO
+		setzeAktuellerZeigerZurueck();
+
+		while (weitereElemente())
+		{
+			if (aktuellerZeiger().getDaten().equals(victim))
+			{
+				if (vorgaengerAktuellerZeiger == null)
+					anfang = anfang.naechster;
+				else
+					vorgaengerAktuellerZeiger.naechster = aktuellerZeiger().naechster;
+
+				anzGeloeschte++;
+			}
+			naechstesElement();
+		}
+		if (aktuellerZeiger().getDaten().equals(victim))
+		{
+			ende = vorgaengerAktuellerZeiger;
+			vorgaengerAktuellerZeiger.naechster = null;
+			vorgaengerAktuellerZeiger = null;
+
+			anzGeloeschte++;
+		}
+		setzeAktuellerZeigerZurueck();
 
 		return anzGeloeschte;
 	}
