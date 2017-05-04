@@ -1,17 +1,15 @@
-import java.math.BigInteger;
-
 public class BesterAlgorithmus
 {
 	// 1000n
 	public static double g1(int n)
 	{
-		return 1000 * n;
+		return 1000.0 * n;
 	}
 
 	// 100n * log2(n+1)
 	public static double g2(int n)
 	{
-		return (100 * n) * (Math.log(n + 1) / Math.log(2));
+		return (100.0 * n) * (Math.log(n + 1) / Math.log(2));
 	}
 
 	// 10 * n * n
@@ -37,19 +35,17 @@ public class BesterAlgorithmus
 	// n!
 	public static double g6(int n)
 	{
-		return factorial(BigInteger.valueOf(n));
+		return factorial(n);
 	}
 
-	public static double factorial(BigInteger n)
+	private static double factorial(double n)
 	{
-		BigInteger factorial = BigInteger.valueOf(1);
+		double factorial = 1;
 
-		for (int i = 1; i <= n.intValue(); i++)
-		{
-			factorial = factorial.multiply(BigInteger.valueOf(i));
-		}
+		for (int i = 2; i <= n; i++)
+			factorial *= i;
 
-		return factorial.doubleValue();
+		return factorial;
 	}
 
 	// Bestimmt fuer alle 6 Funktionen den Wert von
@@ -79,7 +75,7 @@ public class BesterAlgorithmus
 	// 6 Algorithmen (A1 .. A6) für das betrachtete n der Beste ist
 	public static void main(String[] args)
 	{
-		for (int n = 1000; n <= 1500; n++)
+		for (int n = 1; n <= 2000; n++)
 		{
 			System.out
 				.println("Der Gewinner für den Problemumfang " + n + " ist der Algorithmus " + gewinnerFuerN(n) + ".");
