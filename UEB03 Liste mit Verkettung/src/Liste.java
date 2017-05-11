@@ -8,7 +8,8 @@ public class Liste<T>
 	// Vorgänger von AktuellerZeiger
 	protected Link<T> vorgaengerAktuellerZeiger;
 
-	public Liste() {
+	public Liste()
+	{
 		// Leere Liste: alle Zeiger sind null (Standardwerte)
 	}
 
@@ -17,10 +18,12 @@ public class Liste<T>
 		if (vorgaengerAktuellerZeiger == ende)
 		{
 			throw new NoSuchElementException("Am Ende der Liste");
-		} else if (vorgaengerAktuellerZeiger == null)
+		}
+		else if (vorgaengerAktuellerZeiger == null)
 		{
 			vorgaengerAktuellerZeiger = anfang;
-		} else
+		}
+		else
 		{
 			vorgaengerAktuellerZeiger = vorgaengerAktuellerZeiger.naechster;
 		}
@@ -71,7 +74,8 @@ public class Liste<T>
 		{
 			// Neuen Link als anfang der Liste
 			anfang = neu;
-		} else
+		}
+		else
 		{
 			// Anfügen des Elements an das bisherige Ende
 			ende.naechster = neu; // Ende-Element zeigt jetzt auf neu
@@ -93,7 +97,8 @@ public class Liste<T>
 		if (vorgaengerAktuellerZeiger == null)
 		{
 			anfang = anfang.naechster;
-		} else
+		}
+		else
 		{
 			vorgaengerAktuellerZeiger.naechster = zuLoeschendesElement.naechster;
 		}
@@ -188,7 +193,7 @@ public class Liste<T>
 	public void verketten(Liste<T> zweiteListe)
 	{
 		zweiteListe.setzeAktuellerZeigerZurueck();
-		
+
 		while (zweiteListe.weitereElemente())
 		{
 			anfuegenElement(zweiteListe.naechstesElement());
@@ -207,12 +212,13 @@ public class Liste<T>
 		while (weitereElemente())
 		{
 			geloescht = false;
-			
+
 			if (aktuellerZeiger().getDaten().equals(victim))
 			{
 				if (vorgaengerAktuellerZeiger == null)
 					anfang = anfang.naechster;
-				else{
+				else
+				{
 					vorgaengerAktuellerZeiger.naechster = aktuellerZeiger().naechster;
 				}
 				geloescht = true;
@@ -225,18 +231,16 @@ public class Liste<T>
 		if (aktuellerZeiger().getDaten().equals(victim))
 		{
 			ende = vorgaengerAktuellerZeiger;
-			
-			if(aktuellerZeiger() == anfang)
+
+			if (aktuellerZeiger() == anfang)
 				anfang = null;
 			else
 				vorgaengerAktuellerZeiger.naechster = null;
-			
-//			vorgaengerAktuellerZeiger = null;
 
 			anzGeloeschte++;
 		}
 		setzeAktuellerZeigerZurueck();
-		
+
 		return anzGeloeschte;
 
 	}
