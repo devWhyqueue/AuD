@@ -8,8 +8,7 @@ public class Liste<T>
 	// Vorgänger von AktuellerZeiger
 	protected Link<T> vorgaengerAktuellerZeiger;
 
-	public Liste()
-	{
+	public Liste() {
 		// Leere Liste: alle Zeiger sind null (Standardwerte)
 	}
 
@@ -18,12 +17,10 @@ public class Liste<T>
 		if (vorgaengerAktuellerZeiger == ende)
 		{
 			throw new NoSuchElementException("Am Ende der Liste");
-		}
-		else if (vorgaengerAktuellerZeiger == null)
+		} else if (vorgaengerAktuellerZeiger == null)
 		{
 			vorgaengerAktuellerZeiger = anfang;
-		}
-		else
+		} else
 		{
 			vorgaengerAktuellerZeiger = vorgaengerAktuellerZeiger.naechster;
 		}
@@ -40,7 +37,7 @@ public class Liste<T>
 	// Einfügen vor die aktuelle Zeigerposition
 	public void einfuegenElement(T neuesElement)
 	{
-		//Wenn die Liste leer ist, entspricht dies einem anfügen
+		// Wenn die Liste leer ist, entspricht dies einem anfügen
 		if (istLeer())
 		{
 			anfuegenElement(neuesElement);
@@ -74,8 +71,7 @@ public class Liste<T>
 		{
 			// Neuen Link als anfang der Liste
 			anfang = neu;
-		}
-		else
+		} else
 		{
 			// Anfügen des Elements an das bisherige Ende
 			ende.naechster = neu; // Ende-Element zeigt jetzt auf neu
@@ -97,8 +93,7 @@ public class Liste<T>
 		if (vorgaengerAktuellerZeiger == null)
 		{
 			anfang = anfang.naechster;
-		}
-		else
+		} else
 		{
 			vorgaengerAktuellerZeiger.naechster = zuLoeschendesElement.naechster;
 		}
@@ -128,7 +123,8 @@ public class Liste<T>
 		if (zeiger == null)
 			return false;
 
-		// Abfrage auf Gleichheit ist möglich mit equals (Operation von der Klasse Object)
+		// Abfrage auf Gleichheit ist möglich mit equals (Operation von der
+		// Klasse Object)
 		while ((zeiger != null) && !zeiger.getDaten().equals(element))
 		{
 			backupZeiger = vorgaengerAktuellerZeiger;
@@ -160,8 +156,8 @@ public class Liste<T>
 		return istLeer() ? null : (vorgaengerAktuellerZeiger == null) ? anfang : vorgaengerAktuellerZeiger.naechster;
 		// Sonderfallbehandlung; effiziente Kurzform für:
 		// if (istLeer()) { return null; }
-		//  else if (vorgaengerAktuellerZeiger == null) { return anfang; }
-		//    else { return vorgaengerAktuellerZeiger.naechster; }
+		// else if (vorgaengerAktuellerZeiger == null) { return anfang; }
+		// else { return vorgaengerAktuellerZeiger.naechster; }
 	}
 
 	// true, wenn AktuellerZeiger nicht am Ende der Liste ist
@@ -169,7 +165,8 @@ public class Liste<T>
 	{
 		return istLeer() ? false : aktuellerZeiger() != ende;
 		// Effiziente Kurzform für:
-		// if (istLeer()) { return false; } else { return aktuellerZeiger() != ende; }
+		// if (istLeer()) { return false; } else { return aktuellerZeiger() !=
+		// ende; }
 	}
 
 	public Link<T> getAnfang()
@@ -190,6 +187,8 @@ public class Liste<T>
 
 	public void verketten(Liste<T> zweiteListe)
 	{
+		zweiteListe.setzeAktuellerZeigerZurueck();
+		
 		while (zweiteListe.weitereElemente())
 		{
 			anfuegenElement(zweiteListe.naechstesElement());
@@ -201,32 +200,44 @@ public class Liste<T>
 	public int loescheWerte(T victim)
 	{
 		int anzGeloeschte = 0;
+		boolean geloescht = false;
 
 		setzeAktuellerZeigerZurueck();
 
 		while (weitereElemente())
 		{
+			geloescht = false;
+			
 			if (aktuellerZeiger().getDaten().equals(victim))
 			{
 				if (vorgaengerAktuellerZeiger == null)
 					anfang = anfang.naechster;
-				else
+				else{
 					vorgaengerAktuellerZeiger.naechster = aktuellerZeiger().naechster;
+				}
+				geloescht = true;
 
 				anzGeloeschte++;
 			}
-			naechstesElement();
+			if (!geloescht)
+				naechstesElement();
 		}
 		if (aktuellerZeiger().getDaten().equals(victim))
 		{
 			ende = vorgaengerAktuellerZeiger;
-			vorgaengerAktuellerZeiger.naechster = null;
-			vorgaengerAktuellerZeiger = null;
+			
+			if(aktuellerZeiger() == anfang)
+				anfang = null;
+			else
+				vorgaengerAktuellerZeiger.naechster = null;
+			
+//			vorgaengerAktuellerZeiger = null;
 
 			anzGeloeschte++;
 		}
 		setzeAktuellerZeigerZurueck();
-
+		
 		return anzGeloeschte;
+
 	}
 }
