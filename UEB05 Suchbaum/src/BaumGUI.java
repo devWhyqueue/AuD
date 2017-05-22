@@ -28,7 +28,7 @@ public class BaumGUI extends Frame
 		zeichenFuehrungstext.setBounds(12,32,48,24);
 		add(zeichenTextfeld);
 		zeichenTextfeld.setBounds(72,32,48,24);
-//		zeichenTextfeld.setMaxChars(1);
+		zeichenTextfeld.setColumns(1); // CHANGED
 		einfuegenDruckknopf.setLabel("Einfügen");
 		add(einfuegenDruckknopf);
 		einfuegenDruckknopf.setBackground(java.awt.Color.lightGray);
