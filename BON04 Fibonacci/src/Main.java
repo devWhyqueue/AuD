@@ -3,8 +3,8 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		printFibonacciNumber(5, true); // rekursiv
-		printFibonacciNumber(8, false); // iterativ
+		printFibonacciNumber(7, true); // rekursiv
+		printFibonacciNumber(9, false); // iterativ
 		System.out.println();
 		calculateFirst50Numbers();
 
@@ -21,21 +21,21 @@ public class Main
 			fibonacciIterativ(i);
 		ersteUhr.stop();
 		System.out.println("Die iterative Berechnung der ersten 50 Fibonaccizahlen benötigte "
-			+ ersteUhr.getDuration() / Math.pow(10, 6) + " Millisekunden.");
+				+ ersteUhr.getDuration() / Math.pow(10, 6) + " Millisekunden.");
 
 		zweiteUhr.start();
 		for (int i = 1; i < 51; i++)
-			fibonacciRekursivOptimiert(i - 1, 0, 1);
+			fibonacciRekursivOptimiert(i, 0, 1);
 		zweiteUhr.stop();
 		System.out.println("Die optimierte rekursive Berechnung der ersten 50 Fibonaccizahlen benötigte "
-			+ zweiteUhr.getDuration() / Math.pow(10, 6) + " Millisekunden.");
+				+ zweiteUhr.getDuration() / Math.pow(10, 6) + " Millisekunden.");
 
 		dritteUhr.start();
 		for (int i = 1; i < 51; i++)
-			fibonacciRekursiv(i - 1);
+			fibonacciRekursiv(i);
 		dritteUhr.stop();
 		System.out.println("Die rekursive Berechnung der ersten 50 Fibonaccizahlen benötigte "
-			+ dritteUhr.getDuration() / Math.pow(10, 9) + " Sekunden.");
+				+ dritteUhr.getDuration() / Math.pow(10, 9) + " Sekunden.");
 	}
 
 	private static long fibonacciRekursivOptimiert(int grenze, long fib1, long fib2)
@@ -48,22 +48,22 @@ public class Main
 
 	private static void printFibonacciNumber(int n, boolean rekursiv)
 	{
-		int fibonacciNumber;
+		long fibonacciNumber;
 
-		if (n > 0)
+		if (n >= 0)
 		{
 			if (rekursiv)
-				fibonacciNumber = fibonacciRekursiv((n - 1)); // Nötig, da ab 0 gezählt wird
+				fibonacciNumber = fibonacciRekursiv((n));
+															
 			else
 				fibonacciNumber = fibonacciIterativ(n);
 
 			System.out.println("Die " + n + "te Fibonaccizahl ist " + fibonacciNumber + ".");
-		}
-		else
+		} else
 			System.err.println("Ungültige Eingabe!");
 	}
 
-	private static int fibonacciRekursiv(int n)
+	private static long fibonacciRekursiv(long n)
 	{
 		if (n == 0)
 			return 0;
@@ -75,21 +75,24 @@ public class Main
 			return -1; // Fehler
 	}
 
-	private static int fibonacciIterativ(int n)
+	private static long fibonacciIterativ(int n)
 	{
-		int[] fibonacciNumbers;
+		long[] fibonacciNumbers;
 
-		if (n < 2)
-			fibonacciNumbers = new int[2];
+		if(n==0)
+			return 0;
+		else if (n == 1)
+			return 1;
 		else
-			fibonacciNumbers = new int[n];
+			fibonacciNumbers = new long[n + 1];
+		
 		fibonacciNumbers[0] = 0;
 		fibonacciNumbers[1] = 1;
 
 		for (int i = 2; i < fibonacciNumbers.length; i++)
 			fibonacciNumbers[i] = fibonacciNumbers[i - 1] + fibonacciNumbers[i - 2];
 
-		return fibonacciNumbers[n - 1];
+		return fibonacciNumbers[n];
 	}
 
 }
