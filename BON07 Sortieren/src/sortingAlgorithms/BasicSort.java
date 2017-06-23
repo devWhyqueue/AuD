@@ -9,17 +9,18 @@ public class BasicSort
 	{
 		boolean orderRev = false; // Um Sortierreihenfolge umzukehren, bitte auf true setzen ("absteigend") !checkArray() in Main verhindert Berechnung bei true!
 
-		for (int i = links + 1; i <= rechts; i++)
+		for (int i = links + 1; i <= rechts; i++) // Erstes Element ist immer sortiert
 		{
 			int elementQuell = array[i];
 			int zielEnde = i - 1;
 
 			while (zielEnde >= 0 && (orderRev ? (array[zielEnde] < elementQuell) : (array[zielEnde] > elementQuell)))
+			// Wenn letztes Element im sortierten Teil größer (bzw. kleiner) als Element im Quellteil...
 			{
-				array[zielEnde + 1] = array[zielEnde]; //Durchlaufen nach links
+				array[zielEnde + 1] = array[zielEnde]; // Durchlaufen nach links, bis Stelle gefunden wird, wo Quellelement eingesetzt werden soll
 				zielEnde--;
 			}
-			array[zielEnde + 1] = elementQuell;
+			array[zielEnde + 1] = elementQuell; // Setze einzusortierendes Element an richtige Stelle
 		}
 	}
 
@@ -29,19 +30,19 @@ public class BasicSort
 	{
 		boolean orderRev = false; // Zum Ändern der Sortierreihenfolge Variable umsetzen. !checkArray() in Main verhindert Berechnung bei true!
 
-		for (int i = links; i < rechts; i++)
+		for (int i = links; i < rechts; i++) // letztes Element muss an richtiger Stelle stehen
 		{
-			int minOrMaxIndex = i;
+			int minOrMaxIndex = i; // Erstes Element wird als minimal bzw. maximal angenommen.
 
-			for (int j = i + 1; j <= rechts; j++)
+			for (int j = i + 1; j <= rechts; j++) // Durchsuche unsortierten Teil nach Minimum oder Maximum
 			{
 				if (orderRev ? (array[j] > array[minOrMaxIndex]) : (array[j] < array[minOrMaxIndex]))
-					minOrMaxIndex = j;
+					minOrMaxIndex = j; // Setze Index auf das neue Minimum oder Maximum.
 			}
 
 			int hilf = array[minOrMaxIndex];
 			array[minOrMaxIndex] = array[i];
-			array[i] = hilf;
+			array[i] = hilf; // Tausche das Element mit dem gefundenen Index nach vorne.
 		}
 	}
 
