@@ -49,9 +49,9 @@ public class BasicSort
 	// Sortiere das Teilfeld von array beginnend mit Index links bis einschließlich Index rechts
 	public static void bubblesort(int[] array, int links, int rechts)
 	{
-		for (int i = rechts + 1; i > 1; i--)
+		for (int i = rechts + 1; i > 1; i--) // verringert Grenze fürs Bubblen (da sortierter Teil rechts wächst)
 		{
-			for (int j = links; j < (i - 1); j++)
+			for (int j = links; j < (i - 1); j++) // durchläuft noch nicht sortierten Teil und tauscht Nachbarn, wenn nötig
 			{
 				if (array[j] > array[j + 1]) // Für Umkehrung Relationsoperator ändern
 				{
