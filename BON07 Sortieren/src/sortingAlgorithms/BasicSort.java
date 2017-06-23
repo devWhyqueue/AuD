@@ -17,7 +17,7 @@ public class BasicSort
 			while (zielEnde >= 0 && (orderRev ? (array[zielEnde] < elementQuell) : (array[zielEnde] > elementQuell)))
 			// Wenn letztes Element im sortierten Teil größer (bzw. kleiner) als Element im Quellteil...
 			{
-				array[zielEnde + 1] = array[zielEnde]; // Durchlaufen nach links, bis Stelle gefunden wird, wo Quellelement eingesetzt werden soll
+				array[zielEnde + 1] = array[zielEnde]; // ...dann durchlaufe nach links, bis Stelle gefunden wird, wo Quellelement eingesetzt werden soll
 				zielEnde--;
 			}
 			array[zielEnde + 1] = elementQuell; // Setze einzusortierendes Element an richtige Stelle
