@@ -19,7 +19,7 @@ public class BaumTraversieren
 		Deque<AVLKnoten<String>> notVisited = new LinkedList<AVLKnoten<String>>();
 		notVisited.push(einBaum.getWurzel());
 
-		AVLKnoten<String> aktKnoten = notVisited.peek();
+		AVLKnoten<String> aktKnoten;
 
 		while (!notVisited.isEmpty())
 		{

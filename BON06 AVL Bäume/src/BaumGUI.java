@@ -65,7 +65,7 @@ public class BaumGUI extends Frame
 		einBaum = new AVLBaum<Character>();
 		eineBaumAnsicht = new BaumAnsicht(einBaum);
 
-		standardBaum(); // Auskommentieren, wenn nicht gewünscht
+//		standardBaum(); // Auskommentieren, wenn nicht gewünscht
 	}
 
 	private void standardBaum()
