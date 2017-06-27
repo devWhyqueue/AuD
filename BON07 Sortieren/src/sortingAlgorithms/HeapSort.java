@@ -41,7 +41,7 @@ public class HeapSort
 		int m = (int) Math.floor(mHilf); // Startpunkt in der Mitte
 
 		for (int i = m; i >= links; i--)
-			versickere(array, i, links, rechts); // Erzeuge den Heap
+			versickere(array, i, links, rechts); // Erzeuge den Heaps
 
 		for (int i = rechts; i > links; i--)
 		{
