@@ -5,11 +5,13 @@ public class HeapSort
 	// Versickere das Element mit Index zuversickern in dem Teilfeld von Index links bis einschließlich Index rechts
 	public static void versickere(int[] array, int zuversickern, int links, int rechts)
 	{
-		int m = ((rechts - links + 1) / 2) - 1 + links; // Startpunkt in der Mitte
+		double mHilf = (rechts + links - 1) / 2.0;
+		int m = (int) Math.floor(mHilf); // Startpunkt in der Mitte
 
 		while (zuversickern <= m)
 		{
-			int kindIndex = ((zuversickern + 1) * 2) - 1; // Index des linken Kinds
+			//			int kindIndex = ((zuversickern + 1) * 2) - 1; // Index des linken Kinds
+			int kindIndex = 2 * zuversickern + 1; // Index des linken Kinds (vereinfacht)
 
 			if (kindIndex + 1 <= rechts) // Existiert rechtes Kind?
 			{
@@ -35,7 +37,8 @@ public class HeapSort
 
 	public static void heapsort(int[] array, int links, int rechts)
 	{
-		int m = ((rechts - links + 1) / 2) - 1 + links; // Startpunkt in der Mitte
+		double mHilf = (rechts + links - 1) / 2.0;
+		int m = (int) Math.floor(mHilf); // Startpunkt in der Mitte
 
 		for (int i = m; i >= links; i--)
 			versickere(array, i, links, rechts); // Erzeuge den Heap

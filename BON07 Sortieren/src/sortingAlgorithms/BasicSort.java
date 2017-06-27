@@ -14,7 +14,8 @@ public class BasicSort
 			int elementQuell = array[i];
 			int zielEnde = i - 1;
 
-			while (zielEnde >= 0 && (orderRev ? (array[zielEnde] < elementQuell) : (array[zielEnde] > elementQuell)))
+			while (zielEnde >= links
+				&& (orderRev ? (array[zielEnde] < elementQuell) : (array[zielEnde] > elementQuell)))
 			// Wenn letztes Element im sortierten Teil größer (bzw. kleiner) als Element im Quellteil...
 			{
 				array[zielEnde + 1] = array[zielEnde]; // ...dann durchlaufe nach links, bis Stelle gefunden wird, wo Quellelement eingesetzt werden soll
@@ -50,9 +51,9 @@ public class BasicSort
 	// Sortiere das Teilfeld von array beginnend mit Index links bis einschließlich Index rechts
 	public static void bubblesort(int[] array, int links, int rechts)
 	{
-		for (int i = rechts + 1; i > 1; i--) // verringert Grenze fürs Bubblen (da sortierter Teil rechts wächst)
+		for (int i = rechts; i > 0; i--) // verringert Grenze fürs Bubblen (da sortierter Teil rechts wächst)
 		{
-			for (int j = links; j < (i - 1); j++) // durchläuft noch nicht sortierten Teil und tauscht Nachbarn, wenn nötig
+			for (int j = links; j < i; j++) // durchläuft noch nicht sortierten Teil und tauscht Nachbarn, wenn nötig
 			{
 				if (array[j] > array[j + 1]) // Für Umkehrung Relationsoperator ändern
 				{

@@ -1,4 +1,5 @@
 package sortingAlgorithms;
+
 public class Main
 {
 	public static final int INSERTIONSORT = 0;
@@ -9,25 +10,18 @@ public class Main
 	public static final int HEAPSORT = 5;
 
 	public static final int ANZAHLALGORITHMEN = 6;
-	public static final int N = 10000;
+	public static final int N = 100;
 
-	public static final String[] sortNames =
-	{
-		"Insertionsort",
-		"Selectionsort",
-		"Bubblesort",
-		"Quicksort",
-		"Hybridsort",
-		"Heapsort"
-	};
+	public static final String[] sortNames = { "Insertionsort", "Selectionsort", "Bubblesort", "Quicksort",
+			"Hybridsort", "Heapsort" };
 
 	// Gibt ein Array mit n Elementen und zufälligen Zahlen zurück
 	public static int[] getRandomArray(int n)
 	{
 		int[] array = new int[n];
 
-		for (int a = 0; a < n ; a++)
-			array[a] = (int)(Math.random()*10*n);
+		for (int a = 0; a < n; a++)
+			array[a] = (int) (Math.random() * 10 * n);
 
 		return array;
 	}
@@ -35,8 +29,8 @@ public class Main
 	// Prüft, ob ein Array korrekt sortiert ist
 	public static boolean checkArray(int[] array)
 	{
-		for (int a = 0; a < array.length-1; a++)
-			if (array[a] > array[a+1])
+		for (int a = 0; a < array.length - 1; a++)
+			if (array[a] > array[a + 1])
 				return false;
 
 		return true;
@@ -63,28 +57,28 @@ public class Main
 			// Array sortieren
 			switch (algorithmus)
 			{
-			case INSERTIONSORT:
-				BasicSort.insertionsort(array, 0, array.length - 1);
+				case INSERTIONSORT:
+					BasicSort.insertionsort(array, 0, array.length - 1);
 				break;
 
-			case SELECTIONSORT:
-				BasicSort.selectionsort(array, 0, array.length - 1);
+				case SELECTIONSORT:
+					BasicSort.selectionsort(array, 0, array.length - 1);
 				break;
 
-			case BUBBLESORT:
-				BasicSort.bubblesort(array, 0, array.length - 1);
+				case BUBBLESORT:
+					BasicSort.bubblesort(array, 0, array.length - 1);
 				break;
 
-			case QUICKSORT:
-				HybridSort.quicksort(array, 0, array.length - 1);
+				case QUICKSORT:
+					HybridSort.quicksort(array, 0, array.length - 1);
 				break;
 
-			case HYBRIDSORT:
-				HybridSort.hybridsort(array, 0, array.length - 1);
+				case HYBRIDSORT:
+					HybridSort.hybridsort(array, 0, array.length - 1);
 				break;
 
-			case HEAPSORT:
-				HeapSort.heapsort(array, 0, array.length - 1);
+				case HEAPSORT:
+					HeapSort.heapsort(array, 0, array.length - 1);
 				break;
 			}
 
@@ -95,10 +89,10 @@ public class Main
 			if (!(isCorrect &= checkArray(array)))
 				break;
 
-			if ((a==0) || (stopUhr.getDuration()<minTime))
+			if ((a == 0) || (stopUhr.getDuration() < minTime))
 				minTime = stopUhr.getDuration();
 
-			if (stopUhr.getDuration()>maxTime)
+			if (stopUhr.getDuration() > maxTime)
 				maxTime = stopUhr.getDuration();
 
 			sumTime += stopUhr.getDuration();
@@ -107,8 +101,8 @@ public class Main
 		// Ausgabe
 		if (isCorrect)
 		{
-			System.out.format("%16s %10.4f       %10.4f       %10.4f\n",
-				sortNames[algorithmus], minTime / 1000000.0, sumTime / 100000000.0, maxTime / 1000000.0);
+			System.out.format("%16s %10.4f       %10.4f       %10.4f\n", sortNames[algorithmus], minTime / 1000000.0,
+				sumTime / 100000000.0, maxTime / 1000000.0);
 		}
 		else
 		{

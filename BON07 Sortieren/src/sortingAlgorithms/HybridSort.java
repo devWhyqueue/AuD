@@ -61,14 +61,14 @@ public class HybridSort
 		if (links < right)
 		{
 			if ((right - links + 1) > 4)
-				quicksort(array, links, right);
+				hybridsort(array, links, right);
 			else
 				BasicSort.bubblesort(array, links, right);
 		}
 		if (rechts > left)
 		{
 			if ((rechts - left + 1) > 4)
-				quicksort(array, left, rechts);
+				hybridsort(array, left, rechts);
 			else
 				BasicSort.bubblesort(array, left, rechts);
 		}
