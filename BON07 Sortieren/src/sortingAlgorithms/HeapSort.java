@@ -11,7 +11,7 @@ public class HeapSort
 		while (zuversickern <= m)
 		{
 			//			int kindIndex = ((zuversickern + 1) * 2) - 1; // Index des linken Kinds
-			int kindIndex = 2 * zuversickern + 1; // Index des linken Kinds (vereinfacht)
+			int kindIndex = 2 * zuversickern + 1 - links; // Index des linken Kinds (vereinfacht)
 
 			if (kindIndex + 1 <= rechts) // Existiert rechtes Kind?
 			{
