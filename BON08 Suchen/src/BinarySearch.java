@@ -9,14 +9,14 @@ public class BinarySearch
 		String zweitesTier = "Kuh";
 
 		if (binaereSuche(tiere, erstesTier))
-			System.out.println("\"" + erstesTier + "\" ist ist unter den vorhandenen Tieren.");
+			System.out.println("\"" + erstesTier + "\" ist unter den vorhandenen Tieren.");
 		else
-			System.out.println("\"" + erstesTier + "\" ist ist nicht unter den vorhandenen Tieren.");
+			System.out.println("\"" + erstesTier + "\" ist nicht unter den vorhandenen Tieren.");
 
 		if (binaereSuche(tiere, zweitesTier))
-			System.out.println("\"" + zweitesTier + "\" ist ist unter den vorhandenen Tieren.");
+			System.out.println("\"" + zweitesTier + "\" ist unter den vorhandenen Tieren.");
 		else
-			System.out.println("\"" + zweitesTier + "\" ist ist nicht unter den vorhandenen Tieren.");
+			System.out.println("\"" + zweitesTier + "\" ist nicht unter den vorhandenen Tieren.");
 	}
 
 	public static boolean binaereSuche(String[] worte, String begriff)
@@ -27,10 +27,11 @@ public class BinarySearch
 		while (start <= ende)
 		{
 			int mitte = (start + ende) / 2;
+			int comp = worte[mitte].compareTo(begriff);
 
-			if (worte[mitte].compareTo(begriff) > 0)
+			if (comp > 0)
 				ende = mitte - 1;
-			else if (worte[mitte].compareTo(begriff) < 0)
+			else if (comp < 0)
 				start = mitte + 1;
 			else
 				return true;
